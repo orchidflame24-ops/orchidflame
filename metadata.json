@@ -1,0 +1,6 @@
+{
+  "name": "Orchid Flame",
+  "description": "Premium handcrafted soy candles, Vastu harmonized scents, and custom decorative pillars e-commerce experience.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

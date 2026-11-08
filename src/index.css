@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* ORCHID FLAME Luxury Brand Palette */
+  --color-brand-cream-light: #FAF8F5;  /* Softest glowing ivory */
+  --color-brand-cream-base: #F5F2ED;   /* Sand beige-cream */
+  --color-brand-cream-dark: #EAE5DC;   /* Shaded cream */
+  
+  --color-brand-gold-light: #E8DFD1;   /* Pale gold */
+  --color-brand-gold-base: #C29B64;    /* Camel / Warm Gold accent */
+  --color-brand-gold-dark: #825936;    /* Deep mahogany bronze */
+
+  --color-brand-rose-light: #F6EDEE;   /* Soft pink blush */
+  --color-brand-rose-base: #D39E9E;    /* Midtone orchid pink */
+  --color-brand-rose-dark: #8B5E66;    /* Deep rosewood */
+
+  /* Text & Charcoal Tones */
+  --color-stone-950: #1C1917;
+  --color-stone-900: #2C2523;          /* Rich charcoal */
+  --color-stone-800: #3D3533;
+  --color-stone-700: #574E4B;
+  --color-stone-600: #736965;
+  --color-stone-500: #8F8480;
+  --color-stone-400: #B2A7A3;
+  --color-stone-300: #D6CCC7;
+  --color-stone-200: #E7E0DC;
+  --color-stone-100: #F3EEEA;
+  --color-stone-50:  #FAF8F5;
+
+  /* Typography */
+  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+body {
+  background-color: #FAF8F5;
+  background-image: url('/botanical-wallpaper.png');
+  background-repeat: repeat;
+  background-size: 320px auto;
+  color: #2C2523;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Botanical Wallpaper Pattern from Uploaded Reference */
+.bg-botanical-wallpaper {
+  background-color: #FAF8F5;
+  background-image: url('/botanical-wallpaper.png');
+  background-repeat: repeat;
+  background-size: 300px auto;
+}
+
+.bg-botanical-watercolor {
+  background-color: #FAF8F5;
+  background-image: url('/botanical-wallpaper.png');
+  background-repeat: repeat;
+  background-size: 300px auto;
+}
+
+.bg-botanical-wallpaper-faint {
+  background-color: #FAF8F5;
+  background-image: 
+    linear-gradient(rgba(250, 248, 245, 0.6), rgba(250, 248, 245, 0.6)),
+    url('/botanical-wallpaper.png');
+  background-repeat: repeat;
+  background-size: 320px auto;
+}
+
+.bg-botanical-wallpaper-soft {
+  background-color: #FAF8F5;
+  background-image: 
+    linear-gradient(rgba(250, 248, 245, 0.75), rgba(250, 248, 245, 0.75)),
+    url('/botanical-wallpaper.png');
+  background-repeat: repeat;
+  background-size: 300px auto;
+}
+
+/* Candle Art Illustrated Wallpaper from Uploaded Image */
+.bg-candle-wallpaper {
+  background-color: #FAF8F5;
+  background-image: url('/candle-art-wallpaper.png');
+  background-repeat: repeat;
+  background-size: 420px auto;
+}
+
+.bg-candle-wallpaper-faint {
+  background-color: #FAF8F5;
+  background-image: 
+    linear-gradient(rgba(250, 248, 245, 0.88), rgba(250, 248, 245, 0.88)),
+    url('/candle-art-wallpaper.png');
+  background-repeat: repeat;
+  background-size: 440px auto;
+}
+
+.bg-candle-wallpaper-soft {
+  background-color: #FAF8F5;
+  background-image: 
+    linear-gradient(rgba(250, 248, 245, 0.78), rgba(250, 248, 245, 0.78)),
+    url('/candle-art-wallpaper.png');
+  background-repeat: repeat;
+  background-size: 420px auto;
+}
+
+.bg-botanical-fade-left {
+  background-color: #FAF8F5;
+  background-image: 
+    linear-gradient(to right, rgba(250, 248, 245, 0.3) 0%, rgba(250, 248, 245, 0.95) 75%, #FAF8F5 100%),
+    url('/botanical-wallpaper.png');
+  background-repeat: repeat-y;
+  background-size: 100% 100%, 260px auto;
+}
+
+/* Subtle Luxury Texture Patterns */
+.bg-luxury-pattern {
+  background-image: 
+    radial-gradient(circle at 100% 100%, rgba(194, 155, 100, 0.05) 0, transparent 40%),
+    radial-gradient(circle at 0% 0%, rgba(130, 89, 54, 0.04) 0, transparent 40%);
+}
+
+.bg-ornate-grid {
+  background-image: 
+    linear-gradient(to right, rgba(130, 89, 54, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(130, 89, 54, 0.035) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.bg-dark-filigree {
+  background-color: #221D1B;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(194, 155, 100, 0.16) 0%, transparent 60%),
+    linear-gradient(to right, rgba(194, 155, 100, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(194, 155, 100, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 30px 30px, 30px 30px;
+}
+
+/* Fast & Smooth Transitions */
+.smooth-hover {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+  will-change: transform;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF8F5;
+}
+::-webkit-scrollbar-thumb {
+  background: #C29B64;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #825936;
+}
+
+/* Print Optimization for Tax Invoices */
+@media print {
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+  
+  #site-header,
+  #footer,
+  #floating-whatsapp-btn,
+  #cart-drawer,
+  #checkout-modal,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  #invoice-document {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  @page {
+    margin: 1.2cm;
+    size: A4 portrait;
+  }
+}
