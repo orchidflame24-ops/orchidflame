@@ -19,6 +19,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { CartItem, Order, OrderAddress, Coupon, UserProfile } from '../types';
 import { getSiteSettings, SETTINGS_CHANGE_EVENT } from '../services/siteSettings';
 import { isValidEmail } from '../services/firebase';
+import QRCode from 'qrcode';
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -197,8 +198,37 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     setTimeout(() => setUpiNumberCopied(false), 2500);
   };
 
+  const [dynamicQrUrl, setDynamicQrUrl] = useState<string>('');
+
   const upiPayload = `upi://pay?pa=${MERCHANT_UPI_ID}&pn=${encodeURIComponent(siteSettings.merchantName || 'Orchid Flame')}&am=${grandTotal}&cu=INR&tn=Orchid+Flame+Candles`;
-  const qrCodeUrl = siteSettings.paymentQrImage || '/payment-qr.png';
+
+  useEffect(() => {
+    let isMounted = true;
+    QRCode.toDataURL(upiPayload, {
+      width: 320,
+      margin: 2,
+      errorCorrectionLevel: 'M',
+      color: {
+        dark: '#1C1917',
+        light: '#FFFFFF',
+      },
+    })
+      .then((url) => {
+        if (isMounted) setDynamicQrUrl(url);
+      })
+      .catch((err) => {
+        console.warn('Local QRCode generation error, using fallback API', err);
+        if (isMounted) {
+          setDynamicQrUrl(
+            `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(upiPayload)}&margin=10`
+          );
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [upiPayload]);
 
   const validateForm = () => {
     const errors: Record<string, string> = {};
@@ -732,20 +762,31 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   </p>
                 </div>
 
-                {/* High Res QR Box */}
+                {/* Dynamic QR Box pre-loaded with exact order amount */}
                 <div className="p-3.5 bg-stone-50 border border-stone-200 inline-block mx-auto rounded shadow-xs">
-                  <div className="bg-white p-2 rounded border border-stone-200 inline-block shadow-2xs">
-                    <img src={qrCodeUrl} alt={`UPI Payment QR for ${MERCHANT_UPI_ID}`} className="w-56 h-56 object-contain mx-auto" />
+                  <div className="bg-white p-2.5 rounded border border-stone-200 inline-block shadow-2xs">
+                    {dynamicQrUrl ? (
+                      <img
+                        src={dynamicQrUrl}
+                        alt={`UPI Payment QR pre-loaded with ₹${grandTotal} for ${MERCHANT_UPI_ID}`}
+                        className="w-56 h-56 object-contain mx-auto"
+                      />
+                    ) : (
+                      <div className="w-56 h-56 flex flex-col items-center justify-center text-xs text-stone-400 gap-2">
+                        <FontAwesomeIcon icon={faQrcode} className="text-3xl text-stone-300 animate-pulse" />
+                        <span>Loading Payment QR...</span>
+                      </div>
+                    )}
                   </div>
-                  <div className="pt-2 text-center space-y-0.5">
+                  <div className="pt-2 text-center space-y-1">
                     <span className="text-[11px] text-stone-900 font-bold block font-sans">
                       Scan with PhonePe, GPay, Paytm, or Cred
                     </span>
-                    <span className="text-[11px] text-[#825936] font-mono font-bold block">
-                      Pay to: {MERCHANT_UPI_ID}
+                    <span className="text-sm font-extrabold text-[#825936] block font-mono">
+                      Pre-filled Amount: ₹{grandTotal}
                     </span>
                     <span className="text-[10px] text-stone-500 font-mono block">
-                      UPI Number: {MERCHANT_UPI_NUMBER}
+                      Pay to: {MERCHANT_UPI_ID} · Mobile: {MERCHANT_UPI_NUMBER}
                     </span>
                   </div>
                 </div>

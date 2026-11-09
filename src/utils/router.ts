@@ -34,8 +34,15 @@ export const parseCurrentRoute = (): AppRoute => {
   const path = window.location.pathname.toLowerCase();
   const hash = window.location.hash.toLowerCase();
 
-  // 1. Admin Gate route: /ocfl or #/ocfl or #ocfl
-  if (path === '/ocfl' || path === '/ocfl/' || hash.startsWith('#/ocfl') || hash.startsWith('#ocfl')) {
+  // 1. Admin Gate route: /ocfl or /ocfl/ or #/ocfl or #ocfl
+  if (
+    path === '/ocfl' ||
+    path === '/ocfl/' ||
+    path.startsWith('/ocfl') ||
+    hash.startsWith('#/ocfl') ||
+    hash.startsWith('#ocfl') ||
+    window.location.href.toLowerCase().includes('/ocfl')
+  ) {
     return { view: 'admin' };
   }
 
