@@ -128,9 +128,9 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   const grandTotal = Math.max(0, subtotal - appliedDiscount) + shipping;
   const taxAmount = Math.round((subtotal - subtotal / 1.18) * 100) / 100;
 
-  // STRICT UPI NUMBER & VPA (9026006766)
-  const MERCHANT_UPI_ID = siteSettings.merchantUpiId || '9026006766@upi';
-  const MERCHANT_UPI_NUMBER = siteSettings.merchantUpiNumber || '9026006766';
+  // STRICT UPI NUMBER & VPA (7023377369@ybl)
+  const MERCHANT_UPI_ID = siteSettings.merchantUpiId || '7023377369@ybl';
+  const MERCHANT_UPI_NUMBER = siteSettings.merchantUpiNumber || '7023377369';
   const WHATSAPP_PHONE = siteSettings.whatsappPhone || '919026006766';
 
   const handleApplyDiscount = (e: React.FormEvent) => {
@@ -198,7 +198,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   };
 
   const upiPayload = `upi://pay?pa=${MERCHANT_UPI_ID}&pn=${encodeURIComponent(siteSettings.merchantName || 'Orchid Flame')}&am=${grandTotal}&cu=INR&tn=Orchid+Flame+Candles`;
-  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=${encodeURIComponent(upiPayload)}&margin=10`;
+  const qrCodeUrl = siteSettings.paymentQrImage || '/payment-qr.png';
 
   const validateForm = () => {
     const errors: Record<string, string> = {};
@@ -728,19 +728,24 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     <span>Official Orchid Flame UPI Guarantee</span>
                   </div>
                   <p className="text-[10px] text-stone-600 leading-snug">
-                    Payment should be done strictly on official number <strong className="font-mono text-stone-900">{MERCHANT_UPI_NUMBER}</strong> or verified UPI ID. Instant verification on WhatsApp.
+                    Payment should be done strictly on official QR code below or UPI ID <strong className="font-mono text-stone-900">{MERCHANT_UPI_ID}</strong> (Mobile: <strong className="font-mono text-stone-900">{MERCHANT_UPI_NUMBER}</strong>).
                   </p>
                 </div>
 
                 {/* High Res QR Box */}
-                <div className="p-3 bg-stone-50 border border-stone-200 inline-block mx-auto rounded shadow-xs">
-                  <img src={qrCodeUrl} alt="UPI QR for 9026006766" className="w-52 h-52 object-contain mx-auto bg-white p-1" />
+                <div className="p-3.5 bg-stone-50 border border-stone-200 inline-block mx-auto rounded shadow-xs">
+                  <div className="bg-white p-2 rounded border border-stone-200 inline-block shadow-2xs">
+                    <img src={qrCodeUrl} alt={`UPI Payment QR for ${MERCHANT_UPI_ID}`} className="w-56 h-56 object-contain mx-auto" />
+                  </div>
                   <div className="pt-2 text-center space-y-0.5">
-                    <span className="text-[11px] text-stone-800 font-bold block font-sans">
-                      Scan with GPay, PhonePe, Paytm, or Cred
+                    <span className="text-[11px] text-stone-900 font-bold block font-sans">
+                      Scan with PhonePe, GPay, Paytm, or Cred
+                    </span>
+                    <span className="text-[11px] text-[#825936] font-mono font-bold block">
+                      Pay to: {MERCHANT_UPI_ID}
                     </span>
                     <span className="text-[10px] text-stone-500 font-mono block">
-                      Pay to: {MERCHANT_UPI_NUMBER} ({siteSettings.merchantName || 'Orchid Flame'})
+                      UPI Number: {MERCHANT_UPI_NUMBER}
                     </span>
                   </div>
                 </div>

@@ -687,7 +687,7 @@ export default function App() {
           rel="noopener noreferrer"
           className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 w-12 h-12 sm:w-13 sm:h-13 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-108 transition-all duration-200 group cursor-pointer"
           aria-label="Direct WhatsApp Concierge"
-          title={`Chat on WhatsApp (+91 ${siteSettings.merchantUpiNumber || '9026006766'})`}
+          title={`Chat on WhatsApp (+${siteSettings.whatsappPhone || '919026006766'})`}
           id="floating-whatsapp-btn"
         >
           <FontAwesomeIcon icon={faWhatsapp} className="text-xl sm:text-2xl" />

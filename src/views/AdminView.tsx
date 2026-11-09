@@ -1658,7 +1658,7 @@ export const AdminView: React.FC<AdminViewProps> = ({
                     className="w-full text-xs font-mono font-bold bg-stone-50 border border-stone-300 rounded p-2.5 text-stone-900 focus:outline-none focus:border-stone-900 focus:bg-white"
                   />
                   <span className="text-[10px] text-stone-400 block pt-1">
-                    Customers pay strictly to this number. Default: <strong>9026006766</strong>
+                    Customers pay strictly to this number. Default: <strong>7023377369</strong>
                   </span>
                 </div>
 
@@ -1674,7 +1674,7 @@ export const AdminView: React.FC<AdminViewProps> = ({
                     className="w-full text-xs font-mono font-semibold bg-stone-50 border border-stone-300 rounded p-2.5 text-stone-900 focus:outline-none focus:border-stone-900 focus:bg-white"
                   />
                   <span className="text-[10px] text-stone-400 block pt-1">
-                    Encoded into scan QR code: <strong>{siteSettings.merchantUpiId}</strong>
+                    Active Payment UPI ID & QR: <strong>{siteSettings.merchantUpiId}</strong>
                   </span>
                 </div>
 

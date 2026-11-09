@@ -4,8 +4,9 @@ const SETTINGS_KEY = 'orchid_flame_site_settings';
 export const SETTINGS_CHANGE_EVENT = 'orchid_flame_settings_updated';
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
-  merchantUpiId: '9026006766@upi',
-  merchantUpiNumber: '9026006766',
+  merchantUpiId: '7023377369@ybl',
+  merchantUpiNumber: '7023377369',
+  paymentQrImage: '/payment-qr.png',
   merchantName: 'Orchid Flame',
   whatsappPhone: '919026006766',
   contactEmail: 'care@orchidflame.com',
@@ -25,12 +26,21 @@ export const getSiteSettings = (): SiteSettings => {
     const raw = localStorage.getItem(SETTINGS_KEY);
     if (raw) {
       const parsed = JSON.parse(raw);
+      // Auto-migrate legacy UPI values to the official PhonePe UPI ID & QR code
+      const merchantUpiId = (!parsed.merchantUpiId || parsed.merchantUpiId === '9026006766@upi') 
+        ? '7023377369@ybl' 
+        : parsed.merchantUpiId;
+      const merchantUpiNumber = (!parsed.merchantUpiNumber || parsed.merchantUpiNumber === '9026006766') 
+        ? '7023377369' 
+        : parsed.merchantUpiNumber;
+      const paymentQrImage = parsed.paymentQrImage || '/payment-qr.png';
+
       return {
         ...DEFAULT_SITE_SETTINGS,
         ...parsed,
-        // Enforce the requested UPI payment number strictly unless explicitly updated by admin
-        merchantUpiNumber: parsed.merchantUpiNumber || '9026006766',
-        merchantUpiId: parsed.merchantUpiId || '9026006766@upi',
+        merchantUpiNumber,
+        merchantUpiId,
+        paymentQrImage,
         whatsappPhone: parsed.whatsappPhone || '919026006766',
       };
     }

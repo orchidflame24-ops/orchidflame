@@ -112,6 +112,7 @@ export interface Coupon {
 export interface SiteSettings {
   merchantUpiId: string;
   merchantUpiNumber: string;
+  paymentQrImage?: string;
   merchantName: string;
   whatsappPhone: string;
   contactEmail: string;
